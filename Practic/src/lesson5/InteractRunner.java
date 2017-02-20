@@ -1,5 +1,5 @@
+package lesson5;
 import java.util.Scanner;
-
 /**
  * Created by Йотун on 08.01.2017.
  */
