@@ -1,0 +1,8 @@
+<configuration>
+          <archive>
+            <manifest>
+              <mainClass>ru.kabatov.servlets.UserViewServlet</mainClass>
+              <addClasspath>true</addClasspath>
+            </manifest>
+          </archive>
+        </configuration>
