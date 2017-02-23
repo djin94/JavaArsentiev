@@ -22,12 +22,12 @@ public class MainClass {
                 System.out.println("Error #"+i);
             }
         }
-        while (clinic.countClients()<100){
-            System.out.println("Number of clients: " + clinic.countClients());
+        while (clinic.getClients().size()<100){
+            System.out.println("Number of clients: " + clinic.getClients().size());
         }
         for (WorkClinicConcurrent cl : concurrences)
             cl.interrupt();
-        System.out.println("Number of clients: " + clinic.countClients());
+        System.out.println("Number of clients: " + clinic.getClients().size());
         Date end = new Date();
         System.out.println("Time: " + (end.getTime()-st.getTime()));
     }

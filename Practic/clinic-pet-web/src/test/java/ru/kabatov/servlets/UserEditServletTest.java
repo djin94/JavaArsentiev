@@ -10,6 +10,8 @@ import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import java.util.concurrent.atomic.AtomicInteger;
+
 import static org.junit.Assert.*;
 
 /**
@@ -53,7 +55,10 @@ public class UserEditServletTest extends Mockito {
         when(request.getParameter("login")).thenReturn("test1");
         when(request.getParameter("email")).thenReturn("test1");
 
-        new UserEditServlet().doPost(request, response);
+        UserEditServlet ues = new UserEditServlet();
+        ues.ids.set(userCache.findByLogin("test").getId()-1);
+        ues.doPost(request,response);
+
         verify(request, atLeast(1)).getParameter("login");
         verify(request, atLeast(1)).getParameter("email");
 
@@ -61,5 +66,4 @@ public class UserEditServletTest extends Mockito {
         assertEquals(user.getLogin(), "test1");
         userCache.delete(userCache.findByLogin("test1").getId());
     }
-
 }

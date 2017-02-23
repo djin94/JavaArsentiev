@@ -42,7 +42,7 @@ public class Clinic {
             if (clients.get(i).getId().equals(name))
                 client.add(clients.get(i));
         }
-        if (client == null)
+        if (client.size()==0)
             throw new ClientNotFound(name);
         else
             return client;
@@ -60,7 +60,7 @@ public class Clinic {
             if (clients.get(i).getPet().getName().equals(name))
                 client.add(clients.get(i));
         }
-        if (client == null)
+        if (client.size()==0)
             throw new ClientNotFound(name);
         else
             return client;
@@ -72,9 +72,6 @@ public class Clinic {
      */
     public void deleteClient(final Client client){
         clients.remove(client);
-    }
-    public int countClients(){
-        return clients.size();
     }
     public ArrayList<Client> getClients(){
         return clients;
