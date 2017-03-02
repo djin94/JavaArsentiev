@@ -45,12 +45,22 @@
     </servlet-mapping>
 
     <servlet>
-        <servlet-name>UserDeleteServlet</servlet-name>
-        <servlet-class>ru.kabatov.servlets.UserDeleteServlet</servlet-class>
+    <servlet-name>UserDeleteServlet</servlet-name>
+    <servlet-class>ru.kabatov.servlets.UserDeleteServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>
         <servlet-name>UserDeleteServlet</servlet-name>
         <url-pattern>/user/delete</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>CreateUserJsonServlet</servlet-name>
+        <servlet-class>ru.kabatov.servlets.CreateUserJsonServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>CreateUserJsonServlet</servlet-name>
+        <url-pattern>/user/json</url-pattern>
     </servlet-mapping>
 </web-app>
