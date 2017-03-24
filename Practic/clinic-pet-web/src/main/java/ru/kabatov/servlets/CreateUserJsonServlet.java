@@ -34,7 +34,7 @@ public class CreateUserJsonServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.addHeader("Content-Type", "application/json; charset=utf-8");
         final UserForm form = new ObjectMapper().readValue(req.getInputStream(), UserForm.class);
-        USER_CACHE.add(new User(USER_CACHE.generateId(), form.getLogin(), null));
+        USER_CACHE.add(new User(USER_CACHE.generateId(), form.getLogin(), form.getEmail(),form.getAgree(),form.getCity(),form.getSex()));
         resp.getOutputStream().write("{'result' : 'true'}".getBytes());
     }
 }

@@ -6,3 +6,16 @@
             </manifest>
           </archive>
         </configuration>
+
+                            login: JSON.stringify($('#nameClient').val()),
+                            pet: JSON.stringify($('#namePet').val()),
+                            sex : JSON.stringify($('#sex').val()),
+                            city : JSON.stringify($('#city').val()),
+
+                            <td>"+data[i].pet+"</td>" +
+                                                        "<td>"+data[i].sex+"</td><td>"+data[i].city+"</td>
+
+                                                        <th>Кличка животного</th>" +
+                                                                                "<th>Пол</th><th>Город</th>
+
+pet: document.querySelector('#namePet')

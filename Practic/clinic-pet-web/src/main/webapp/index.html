@@ -8,11 +8,13 @@
     <script type="text/javascript">
         function createUser() {
             if (validate()) {
-                $('#name').css('background-color', '');
                 $.ajax('user/json', {
-                    method : 'post',
-                    data: JSON.stringify({login : $('#name').val()}),
-                    complete: function(data) {
+                    method: 'post',
+                    data: JSON.stringify({
+                        login: $('#nameClient').val(), email: $('#email').val(),
+                        agree: $('#agree').val(), city: $('#city').val(), sex: $('#sex').val()
+                    }),
+                    complete: function (data) {
                         loadUsers();
                     }
                 });
@@ -21,29 +23,35 @@
             }
         }
         function loadUsers() {
+            alert("3");
             $.ajax('user/json', {
-                method : 'get',
-                success: function(data) {
+                method: 'get',
+                success: function (data) {
+                    alert("4");
                     var table = "<table>";
-                    table += "<tr><th>Имя</th></tr>"
+                    table += "<tr><th>Имя</th><th>Email</th>"+
+                    "<th>Соглашение</th><th>Город</th><th>Пол</th></tr>";
                     var size = data.length;
-                    for (var i=0;i!=size;++i) {
-                        table += "<tr><td>"+data[i].login+"</td></tr>"
+                    alert(size + " s");
+                    for (var i = 0; i != size; ++i) {
+                        table += "<tr><td>" + data[i].login + "</td><td>" + data[i].email + "</td>"+
+                        "<td>" + data[i].agree + "</td><td>" + data[i].city + "</td><td>" + data[i].sex + "</td>" +
+                        "</tr>";
                     }
-                    table += "</table>"
+                    table += "</table>";
                     $('#users').html(table);
                 }
             });
         }
         function validate() {
             var result = true;
-            if ($('#name').val() == '') {
-                $('#name').css('background-color', 'red');
+            if ($('#nameClient').val() == '') {
+                $('#nameClient').css('background-color', 'red');
                 result = false;
             }
             return result;
         }
-        $(function() {
+        $(function () {
             loadUsers();
         });
     </script>
@@ -55,17 +63,21 @@
 <div class="center">
     <div class="form">
         <div>
-            <label for="name">Имя</label>
-            <input type="text" name="name" id="name"/>
+            <label for="nameClient">Имя</label>
+            <input type="text" name="nameClient" id="nameClient" value="bbxz"/>
+        </div>
+        <div>
+            <label for="email">Email</label>
+            <input type="text" name="email" id="email" value="vxzvz"/>
         </div>
         <div>
             <label for="agree">Соглашение</label>
-            <input type="checkbox" name="agree" id="agree"/>
+            <input type="checkbox" name="agree" id="agree" checked="true"/>
         </div>
         <div>
             <label for="sex">Пол </label>
             <span>
-                <input type="radio" name="sex" id="sex" value="Муж"/> Мужской
+                <input type="radio" name="sex" id="sex" value="Муж" checked="true"/> Мужской
                 <input type="radio" name="sex" value="Жен"/> Женский
             </span>
         </div>
@@ -77,7 +89,7 @@
             </select>
         </div>
         <div style="text-align: right;">
-            <input type="button" value="Создать" onclick="return createUser();">
+            <input type="button" value="Создать" onclick="createUser()">
         </div>
     </div>
 </div>
