@@ -10,10 +10,15 @@
             if (validate()) {
                 $('#nameClient').css('background-color', '');
                 $('#email').css('background-color', '');
+                $('#agree').css('background-color', '');
+                $('#sex').css('background-color', '');
+                $('#city').css('background-color', '');
+
                 $.ajax('user/json', {
                     method: 'post',
                     data: JSON.stringify({
-                        login: $('#nameClient').val(), email: $('#email').val()
+                        login: $('#nameClient').val(), email: $('#email').val(),
+                        agree: $('#agree').val(), city: $('#city').val(), sex: $('#sex').val()
                     }),
                     complete: function (data) {
                         loadUsers();
@@ -28,11 +33,13 @@
                 method: 'get',
                 success: function (data) {
                     var table = "<table>";
-                    table += "<tr><th>Имя</th><th>Email</th>";
+                    table += "<tr><th>Имя</th><th>Email</th>"+
+                    "<th>Соглашение</th><th>Город</th><th>Пол</th></tr>";
                     var size = data.length;
                     for (var i = 0; i != size; ++i) {
                         table += "<tr><td>" + data[i].login + "</td><td>" + data[i].email + "</td>"+
-                            "</tr>";
+                        "<td>" + data[i].agree + "</td><td>" + data[i].city + "</td><td>" + data[i].sex + "</td>" +
+                        "</tr>";
                     }
                     table += "</table>";
                     $('#users').html(table);
@@ -47,6 +54,18 @@
             }
             if ($('#email').val()==''){
                 $('#email').css('background-color', 'red');
+                result=false;
+            }
+            if ($('#agree').val()==''){
+                $('#agree').css('background-color', 'red');
+                result=false;
+            }
+            if ($('#sex').val()==''){
+                $('#sex').css('background-color', 'red');
+                result=false;
+            }
+            if ($('#city').val()==''){
+                $('#city').css('background-color', 'red');
                 result=false;
             }
             return result;
@@ -69,6 +88,24 @@
         <div>
             <label for="email">Email</label>
             <input type="text" name="email" id="email" value="vxzvz"/>
+        </div>
+        <div>
+            <label for="agree">Соглашение</label>
+            <input type="checkbox" name="agree" id="agree" checked="true"/>
+        </div>
+        <div>
+            <label for="sex">Пол </label>
+            <span>
+                <input type="radio" name="sex" id="sex" value="men" checked="true"/> Мужской
+                <input type="radio" name="sex" value="woman"/> Женский
+            </span>
+        </div>
+        <div>
+            <label for="city">Город</label>
+            <select name="city" id="city">
+                <option value="Moscow">Москва</option>
+                <option value="Petersburg">Питер</option>
+            </select>
         </div>
         <div style="text-align: right;">
             <input type="button" value="Создать" onclick="createUser()">

@@ -53,3 +53,16 @@ create table messages (
 		text  character varying,
 		user_id int not null references users(uid)
 );
+ALTER TABLE public.users ADD COLUMN city VarCHAR(50);
+UPDATE public.client
+SET email='dsgsdg'
+WHERE uid = 1;
+UPDATE public.client
+SET email='jdchd'
+WHERE uid = 2;
+UPDATE public.client
+SET email='ljhjl'
+WHERE uid = 3;
+UPDATE public.client
+SET email='ftrtr4'
+WHERE uid = 4;
