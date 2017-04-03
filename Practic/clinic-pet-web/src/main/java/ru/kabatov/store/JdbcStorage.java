@@ -23,10 +23,16 @@ package ru.kabatov.store;
  * @since 29.04.2015
  */
 public class JdbcStorage implements Storage {
-    private final Connection connection;
+    private  Connection connection=null;
 
     public JdbcStorage() {
         final Settings settings = Settings.getInstance();
+        try {
+            Class.forName(settings.value("jdbc.driver_class"));
+        }
+        catch (ClassNotFoundException e){
+
+        }
         try {
             this.connection = DriverManager.getConnection(settings.value("jdbc.url"), settings.value("jdbc.username"), settings.value("jdbc.password"));
         } catch (SQLException e) {
@@ -40,7 +46,7 @@ public class JdbcStorage implements Storage {
         try (final Statement statement = this.connection.createStatement();
              final ResultSet rs = statement.executeQuery("select * from client")) {
             while (rs.next()) {
-                users.add(new User(rs.getInt("uid"), rs.getString("name"), rs.getString("email")));
+                users.add(new User(rs.getInt("uid"), rs.getString("name"), rs.getString("email"),rs.getString("city")));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -50,8 +56,10 @@ public class JdbcStorage implements Storage {
 
     @Override
     public int add(User user) {
-        try (final PreparedStatement statement = this.connection.prepareStatement("insert into client (name) values (?)", Statement.RETURN_GENERATED_KEYS)) {
+        try (final PreparedStatement statement = this.connection.prepareStatement("insert into client (name,email,city) values (?,?,?)", Statement.RETURN_GENERATED_KEYS)) {
             statement.setString(1, user.getLogin());
+            statement.setString(2,user.getEmail());
+            statement.setString(3,user.getCity());
             statement.executeUpdate();
             try (ResultSet generatedKeys = statement.getGeneratedKeys()) {
                 if (generatedKeys.next()) {

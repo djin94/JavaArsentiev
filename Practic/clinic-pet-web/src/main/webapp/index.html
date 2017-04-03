@@ -13,7 +13,7 @@
                 $.ajax('user/json', {
                     method: 'post',
                     data: JSON.stringify({
-                        login: $('#nameClient').val(), email: $('#email').val()
+                        login: $('#nameClient').val(), email: $('#email').val(), city: $('#city').val()
                     }),
                     complete: function (data) {
                         loadUsers();
@@ -24,15 +24,18 @@
             }
         }
         function loadUsers() {
+            alert("g");
             $.ajax('user/json', {
                 method: 'get',
                 success: function (data) {
                     var table = "<table>";
-                    table += "<tr><th>Имя</th><th>Email</th>";
+                    table += "<tr><th>Имя</th><th>Email</th><th>Город</th></tr>";
                     var size = data.length;
+                    alert(size);
                     for (var i = 0; i != size; ++i) {
-                        table += "<tr><td>" + data[i].login + "</td><td>" + data[i].email + "</td>"+
-                            "</tr>";
+                        table += "<tr><td>" + data[i].login + "</td><td>" + data[i].email + "</td><td>" + data[i].city
+                        "</td>" +
+                        "</tr>";
                     }
                     table += "</table>";
                     $('#users').html(table);
@@ -45,9 +48,9 @@
                 $('#nameClient').css('background-color', 'red');
                 result = false;
             }
-            if ($('#email').val()==''){
+            if ($('#email').val() == '') {
                 $('#email').css('background-color', 'red');
-                result=false;
+                result = false;
             }
             return result;
         }
@@ -69,6 +72,10 @@
         <div>
             <label for="email">Email</label>
             <input type="text" name="email" id="email" value="vxzvz"/>
+        </div>
+        <div>
+            <label for="city">Город</label>
+            <input type="text" name="city" id="city" value="Moscow"/>
         </div>
         <div style="text-align: right;">
             <input type="button" value="Создать" onclick="createUser()">

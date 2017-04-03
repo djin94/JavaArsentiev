@@ -23,6 +23,13 @@ public class User extends Base {
         this.sex = sex;
     }
 
+    public User(final int id,String login, String email, String city) {
+        this.id = id;
+        this.login = login;
+        this.email = email;
+        this.city = city;
+    }
+
     public String getAgree() {
         return agree;
     }

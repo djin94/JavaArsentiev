@@ -16,6 +16,7 @@ import java.io.IOException;
 
 /**
  * TODO: comment
+ *
  * @author parsentev
  * @since 25.04.2015
  */
@@ -36,7 +37,13 @@ public class CreateUserJsonServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.addHeader("Content-Type", "application/json; charset=utf-8");
         final UserForm form = new ObjectMapper().readValue(req.getInputStream(), UserForm.class);
-        USER_CACHE.add(new User(USER_CACHE.generateId(), form.getLogin(), form.getEmail()));
+        USER_CACHE.add(new User(USER_CACHE.generateId(), form.getLogin(), form.getEmail(), form.getCity()));
         resp.getOutputStream().write("{'result' : 'true'}".getBytes());
+        read();
+    }
+
+    public void read() {
+        for (User user : USER_CACHE.values())
+            System.out.println(user.getId());
     }
 }
