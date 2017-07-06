@@ -24,14 +24,12 @@
             }
         }
         function loadUsers() {
-            alert("g");
             $.ajax('user/json', {
                 method: 'get',
                 success: function (data) {
                     var table = "<table>";
                     table += "<tr><th>Имя</th><th>Email</th><th>Город</th></tr>";
                     var size = data.length;
-                    alert(size);
                     for (var i = 0; i != size; ++i) {
                         table += "<tr><td>" + data[i].login + "</td><td>" + data[i].email + "</td><td>" + data[i].city
                         "</td>" +
