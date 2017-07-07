@@ -7,12 +7,13 @@ import java.util.Collection;
 /**
  * Created by Кабатов on 30.03.2017.
  */
-public class UserCacheJdbc implements Storage{
-    private static final UserCacheJdbc INSTANCE = new UserCacheJdbc();
+public class UserCacheHbn implements Storage{
+    private static final UserCacheHbn INSTANCE = new UserCacheHbn();
 
-    private final Storage storage = new JdbcStorage();
 
-    public static UserCacheJdbc getInstance() {
+    private final Storage storage = new HibernateStorage();
+
+    public static UserCacheHbn getInstance() {
         return INSTANCE;
     }
 

@@ -12,5 +12,7 @@
             <generator class="identity"/>
         </id>
         <property name="login" column="name" type="string"/>
+        <property name="email" column="email" type="string"/>
+        <property name="city" column="city" type="string"/>-
     </class>
 </hibernate-mapping>

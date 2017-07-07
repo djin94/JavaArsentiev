@@ -5,6 +5,7 @@ import org.codehaus.jackson.map.ObjectMapper;
 import ru.kabatov.form.UserForm;
 import ru.kabatov.models.User;
 import ru.kabatov.store.UserCache;
+import ru.kabatov.store.UserCacheHbn;
 import ru.kabatov.store.UserCacheJdbc;
 
 import javax.servlet.ServletException;
@@ -22,7 +23,7 @@ import java.io.IOException;
  */
 public class CreateUserJsonServlet extends HttpServlet {
 
-    private final UserCacheJdbc USER_CACHE = UserCacheJdbc.getInstance();
+    private final UserCacheHbn USER_CACHE = UserCacheHbn.getInstance();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
