@@ -1,5 +1,7 @@
 package ru.kabatov.models;
 
+import org.codehaus.jackson.annotate.JsonBackReference;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -16,6 +18,7 @@ public class User extends Base {
     private String sex;
     private String agree;
     private Role role;
+    @JsonBackReference
     private Set<Message> messages;
     private ArrayList<Role> roles = new ArrayList<>();
 
@@ -43,6 +46,17 @@ public class User extends Base {
         this.sex = sex;
         this.agree = agree;
         this.role = role;
+    }
+
+    public User(final int id, String login, String email, String city, String sex, String agree, Role role, Set<Message> messages) {
+        this.id = id;
+        this.login = login;
+        this.email = email;
+        this.city = city;
+        this.sex = sex;
+        this.agree = agree;
+        this.role = role;
+        this.messages = messages;
     }
 
     public String getCity() {

@@ -6,6 +6,12 @@
   <artifactId>clinic-pet-web</artifactId>
   <version>1.0-SNAPSHOT</version>
   <packaging>war</packaging>
+<name>clinic-pet-web</name>
+    <url>http://maven.apache.org</url>
+    <properties>
+        <spring.version>4.0.5.RELEASE</spring.version>
+        <spring.security.version>4.0.1.RELEASE</spring.security.version>
+    </properties>
 
   <build>
     <plugins>

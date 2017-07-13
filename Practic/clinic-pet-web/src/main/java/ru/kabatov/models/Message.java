@@ -1,6 +1,9 @@
 package ru.kabatov.models;
 
+import org.codehaus.jackson.annotate.JsonManagedReference;
+
 public class Message extends Base {
+    @JsonManagedReference
     private User user;
     private String text;
 

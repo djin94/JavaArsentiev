@@ -7,6 +7,7 @@ import ru.kabatov.models.Message;
 import ru.kabatov.models.Role;
 import ru.kabatov.models.User;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 
 import static org.junit.Assert.*;
@@ -35,7 +36,7 @@ public class HibernateStorageTest {
 
     @Test
     public void testCreateUser() throws Exception {
-        final HibernateStorage storage = new HibernateStorage();
+        /*final HibernateStorage storage = new HibernateStorage();
         Role role = new Role();
         role.setName("admin");
         User user = new User();
@@ -53,6 +54,29 @@ public class HibernateStorageTest {
         storage.edit(user);
         assertEquals(1, storage.get(id).getMessages().size());
         //storage.delete(id);
-        storage.close();
+        storage.close();*/
+    }
+
+    @Test
+    public void testUserValues() throws Exception {
+        /*HibernateStorage storage = new HibernateStorage();
+        ArrayList<User> users = new ArrayList<>(storage.values());*/
+
+    }
+
+    @Test
+    public void testDelete() throws Exception {
+       /* HibernateStorage storage = new HibernateStorage();
+        storage.delete(7);
+        storage.delete(8);
+        storage.delete(9);
+        storage.delete(10);
+        storage.delete(11);
+        storage.delete(12);
+        storage.delete(13);
+        storage.delete(14);
+        storage.delete(15);
+        storage.delete(16);
+        storage.delete(17);*/
     }
 }

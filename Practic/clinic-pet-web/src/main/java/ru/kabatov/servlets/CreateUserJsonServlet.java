@@ -2,6 +2,8 @@ package ru.kabatov.servlets;
 
 
 import org.codehaus.jackson.annotate.JsonAutoDetect;
+import org.codehaus.jackson.annotate.JsonIgnore;
+import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.map.SerializationConfig;
 import ru.kabatov.form.UserForm;
@@ -16,6 +18,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.ArrayList;
 
 /**
  * TODO: comment
@@ -24,10 +27,10 @@ import java.io.IOException;
  * @since 25.04.2015
  */
 @JsonAutoDetect
+
 public class CreateUserJsonServlet extends HttpServlet {
 
-    private final UserCacheHbn USER_CACHE = UserCacheHbn.getInstance();
-
+    private UserCacheHbn USER_CACHE = UserCacheHbn.getInstance();
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.addHeader("Content-Type", "application/json; charset=utf-8");
@@ -36,9 +39,9 @@ public class CreateUserJsonServlet extends HttpServlet {
         ObjectMapper mapper = new ObjectMapper();
         mapper.configure(SerializationConfig.Feature.FAIL_ON_EMPTY_BEANS, false);
 // do various things, perhaps:
-        String someJsonString = mapper.writeValueAsString(USER_CACHE);
-        UserCacheHbn someClassInstance = mapper.readValue(someJsonString, UserCacheHbn.class);
-        out.print(mapper.writeValueAsString(USER_CACHE.values()));
+        ArrayList<User> users = new ArrayList<>();
+        String someJsonString = mapper.writeValueAsString(USER_CACHE.values());
+        out.print(someJsonString);
         out.flush();
     }
 
