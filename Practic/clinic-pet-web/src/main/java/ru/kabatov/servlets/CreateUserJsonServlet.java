@@ -1,7 +1,9 @@
 package ru.kabatov.servlets;
 
 
+import org.codehaus.jackson.annotate.JsonAutoDetect;
 import org.codehaus.jackson.map.ObjectMapper;
+import org.codehaus.jackson.map.SerializationConfig;
 import ru.kabatov.form.UserForm;
 import ru.kabatov.models.User;
 import ru.kabatov.store.UserCache;
@@ -21,6 +23,7 @@ import java.io.IOException;
  * @author parsentev
  * @since 25.04.2015
  */
+@JsonAutoDetect
 public class CreateUserJsonServlet extends HttpServlet {
 
     private final UserCacheHbn USER_CACHE = UserCacheHbn.getInstance();
@@ -30,7 +33,12 @@ public class CreateUserJsonServlet extends HttpServlet {
         resp.addHeader("Content-Type", "application/json; charset=utf-8");
         final ServletOutputStream out = resp.getOutputStream();
         //req.setAttribute("users",this.USER_CACHE.values());
-        out.print(new ObjectMapper().writeValueAsString(USER_CACHE.values()));
+        ObjectMapper mapper = new ObjectMapper();
+        mapper.configure(SerializationConfig.Feature.FAIL_ON_EMPTY_BEANS, false);
+// do various things, perhaps:
+        String someJsonString = mapper.writeValueAsString(USER_CACHE);
+        UserCacheHbn someClassInstance = mapper.readValue(someJsonString, UserCacheHbn.class);
+        out.print(mapper.writeValueAsString(USER_CACHE.values()));
         out.flush();
     }
 

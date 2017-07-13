@@ -4,7 +4,9 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
+import org.hibernate.service.ServiceRegistry;
 import ru.kabatov.models.User;
 
 import java.util.Collection;
@@ -18,7 +20,11 @@ public class HibernateStorage implements Storage {
     private final SessionFactory factory;
 
     public HibernateStorage() {
-        factory = new Configuration().configure().buildSessionFactory();
+        Configuration configuration = new Configuration();
+        configuration.configure();
+        ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder().applySettings(
+                configuration.getProperties()).build();
+        factory = configuration.buildSessionFactory(serviceRegistry);
     }
 
     @Override
@@ -48,7 +54,14 @@ public class HibernateStorage implements Storage {
 
     @Override
     public void edit(User user) {
-
+        final Session session = factory.openSession();
+        Transaction tx = session.beginTransaction();
+        try {
+            session.update(user);
+        } finally {
+            tx.commit();
+            session.close();
+        }
     }
 
     @Override
@@ -56,7 +69,7 @@ public class HibernateStorage implements Storage {
         final Session session = factory.openSession();
         Transaction tx = session.beginTransaction();
         try {
-            session.delete(new User(id, null, null));
+            session.delete(get(id));
         } finally {
             tx.commit();
             session.close();

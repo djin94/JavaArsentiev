@@ -66,3 +66,8 @@ WHERE uid = 3;
 UPDATE public.client
 SET email='ftrtr4'
 WHERE uid = 4;
+
+insert into users values (1,"hbn","fasf",1,"dsgsd","m","true");
+
+insert into roles values (1,'admin');
+insert into users values (1,'hbn','fasf',1,'dsgsd','m','true');

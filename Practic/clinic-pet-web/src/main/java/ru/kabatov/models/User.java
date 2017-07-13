@@ -1,6 +1,8 @@
 package ru.kabatov.models;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 /**
  * TODO: comment
@@ -10,32 +12,37 @@ import java.util.List;
 public class User extends Base {
     private String login;
     private String email;
-    private String agree;
     private String city;
     private String sex;
+    private String agree;
+    private Role role;
+    private Set<Message> messages;
+    private ArrayList<Role> roles = new ArrayList<>();
 
-    public User(final int id, String login, String email, String agree, String city, String sex) {
+    public User() {
+    }
+
+    public User(final int id, final String login, final String email, final String city) {
         this.id = id;
         this.login = login;
         this.email = email;
-        this.agree = agree;
+        this.city = city;
+    }
+
+    public User(final int id, String login, String email) {
+        this.id = id;
+        this.login = login;
+        this.email = email;
+    }
+
+    public User(final int id, String login, String email, String city, String sex, String agree, Role role) {
+        this.id=id;
+        this.login = login;
+        this.email = email;
         this.city = city;
         this.sex = sex;
-    }
-
-    public User(final int id,String login, String email, String city) {
-        this.id = id;
-        this.login = login;
-        this.email = email;
-        this.city = city;
-    }
-
-    public String getAgree() {
-        return agree;
-    }
-
-    public void setAgree(String agree) {
         this.agree = agree;
+        this.role = role;
     }
 
     public String getCity() {
@@ -54,16 +61,12 @@ public class User extends Base {
         this.sex = sex;
     }
 
-    private Role role;
-    private List<Message> messages;
-
-    public User() {
+    public String getAgree() {
+        return agree;
     }
 
-    public User(final int id, final String login, final String email) {
-        this.id = id;
-        this.login = login;
-        this.email = email;
+    public void setAgree(String agree) {
+        this.agree = agree;
     }
 
     public Role getRole() {
@@ -74,11 +77,11 @@ public class User extends Base {
         this.role = role;
     }
 
-    public List<Message> getMessages() {
+    public Set<Message> getMessages() {
         return messages;
     }
 
-    public void setMessages(List<Message> messages) {
+    public void setMessages(Set<Message> messages) {
         this.messages = messages;
     }
 
@@ -88,10 +91,6 @@ public class User extends Base {
 
     public String getEmail() {
         return this.email;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public void setLogin(String login) {
