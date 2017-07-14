@@ -7,6 +7,7 @@ import org.hibernate.Transaction;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
+import org.springframework.stereotype.Repository;
 import ru.kabatov.models.User;
 
 import java.util.Collection;
@@ -16,7 +17,8 @@ import java.util.Collection;
  * @author parsentev
  * @since 01.05.2015
  */
-public class HibernateStorage implements Storage {
+@Repository
+public class HibernateStorage implements Storage<User> {
     private final SessionFactory factory;
 
     public HibernateStorage() {
