@@ -1,22 +1,28 @@
 package ru.kabatov.store;
 
+import org.springframework.transaction.annotation.Transactional;
 import ru.kabatov.models.User;
 
 import java.util.Collection;
 
-public interface Storage {
+/**
+ * TODO: comment
+ * @author parsentev
+ * @since 29.04.2015
+ */
+public interface Storage<T> {
 
-    public Collection<User> values();
+    public Collection<T> values();
 
-    public int add(final User user);
+    public int add(final T user);
 
-    public void edit(final User user);
+    public void edit(final T user);
 
     public void delete(final int id);
 
-    public User get(final int id);
+    public T get(final int id);
 
-    public User findByLogin(final String login) ;
+    public T findByLogin(final String login) ;
 
     public int generateId();
 
